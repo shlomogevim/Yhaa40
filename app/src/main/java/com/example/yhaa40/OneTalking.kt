@@ -2,14 +2,16 @@ package com.example.yhaa40
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_one_talking.*
 
 class OneTalking : AppCompatActivity() {
-    var numTalking=1
+    var numTalking = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_one_talking)
 
-        numTalking=intent.getIntExtra("TalkNum",1)
+        numTalking = intent.getIntExtra("TalkNum", 1)
+        textView.text = numTalking.toString()
     }
 }
