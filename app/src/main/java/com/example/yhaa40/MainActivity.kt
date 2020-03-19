@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         personList = ArrayList<Person>()
         layoutManager = LinearLayoutManager(this)
-        adapter = PersonListAdapter(personList!!)
+        adapter = PersonListAdapter(this, personList!!)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         for (i in 0..91) {

@@ -1,12 +1,14 @@
 package com.example.yhaa40
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_row.view.*
 
-class PersonListAdapter(private val personList:ArrayList<Person>):
+class PersonListAdapter(val context: Context,private val personList:ArrayList<Person>):
     RecyclerView.Adapter<PersonListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,6 +21,12 @@ class PersonListAdapter(private val personList:ArrayList<Person>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.view.name.text=personList[position].name
         holder.view.age.text=personList[position].age.toString()
+        holder.view.cardView.setOnClickListener {
+            val intent=Intent(context,OneTalking::class.java)
+            intent.putExtra("TalkNum",position)
+            context.startActivity(intent)
+
+        }
     }
     class ViewHolder(val view:View):RecyclerView.ViewHolder(view)
 }
