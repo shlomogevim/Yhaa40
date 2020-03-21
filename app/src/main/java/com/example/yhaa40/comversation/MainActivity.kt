@@ -20,28 +20,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val talkNum = 3
-       //val talkNum = -1
-        if (talkNum >= 0) {
-            setSpesialTalk(talkNum)
-        } else {
 
-            personList = ArrayList<Person>()
-            layoutManager = LinearLayoutManager(this)
-            adapter =
-                PersonListAdapter(this, personList!!)
-            recyclerView.layoutManager = layoutManager
-            recyclerView.adapter = adapter
-            for (i in 0..91) {
-                val preson = Person(
-                    "Mami" + i.toString(),
-                    40 + i
-                )
-                personList!!.add(preson)
-            }
-            adapter!!.notifyDataSetChanged()
+        /*val talkNum = 0
+        when (talkNum){
+            -1-> setSpesialTalk(talkNum)
+          //  -2->activateList()
+            else->activateList()
+
+        }*/
+       val talkNum = -1
+
+        if (talkNum==-1){
+            activateList()
         }
+       if (talkNum in 0..99) {
+           setSpesialTalk(talkNum)
+       }
 
+
+    }
+
+    private fun activateList() {
+        personList = ArrayList<Person>()
+        layoutManager = LinearLayoutManager(this)
+        adapter =
+            PersonListAdapter(this, personList!!)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
+        for (i in 0..91) {
+            val preson = Person(
+                "Mami" + i.toString(),
+                40 + i
+            )
+            personList!!.add(preson)
+        }
+        adapter!!.notifyDataSetChanged()
     }
 
     private fun setSpesialTalk(talkNum: Int) {
