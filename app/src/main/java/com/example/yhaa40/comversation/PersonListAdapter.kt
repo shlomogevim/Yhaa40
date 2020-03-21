@@ -1,4 +1,4 @@
-package com.example.yhaa40
+package com.example.yhaa40.comversation
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.yhaa40.OneTalking
+import com.example.yhaa40.R
 import kotlinx.android.synthetic.main.list_row.view.*
 
 class PersonListAdapter(val context: Context,private val personList:ArrayList<Person>):
@@ -22,7 +24,7 @@ class PersonListAdapter(val context: Context,private val personList:ArrayList<Pe
         holder.view.name.text=personList[position].name
         holder.view.age.text=personList[position].age.toString()
         holder.view.cardView.setOnClickListener {
-            val intent=Intent(context,OneTalking::class.java)
+            val intent=Intent(context, OneTalking::class.java)
             intent.putExtra("TalkNum",position)
             context.startActivity(intent)
 

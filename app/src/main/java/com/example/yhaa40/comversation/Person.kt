@@ -1,4 +1,4 @@
-package com.example.yhaa40
+package com.example.yhaa40.comversation
 
 data class Person(
     val name:String?=null,
