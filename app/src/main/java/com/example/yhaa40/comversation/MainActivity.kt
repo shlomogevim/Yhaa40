@@ -6,14 +6,15 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yhaa40.GetAndStoreData
+import com.example.yhaa40.Helper
 import com.example.yhaa40.OneTalking
 import com.example.yhaa40.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var pref: GetAndStoreData
-    private var adapter: PersonListAdapter? = null
-    private var personList: ArrayList<Person>? = null
+    private var adapter: ConversationAdapter? = null
+    private var conversationList: ArrayList<Conversation>? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,19 +42,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun activateList() {
-        personList = ArrayList<Person>()
+      conversationList = ArrayList<Conversation>()
+       Helper.Page.createConverList()
+        conversationList=Helper.Page.conversList
+
         layoutManager = LinearLayoutManager(this)
-        adapter =
-            PersonListAdapter(this, personList!!)
+        adapter = ConversationAdapter(this, conversationList!!)
+           // ConversationAdapter(this, conversationList!!)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-        for (i in 0..91) {
-            val preson = Person(
+
+      /*  for (i in 0..91) {
+            val preson = Conversation(
                 "Mami" + i.toString(),
-                40 + i
+                (40 + i).toString()
             )
-            personList!!.add(preson)
-        }
+            conversationList!!.add(preson)
+        }*/
+
         adapter!!.notifyDataSetChanged()
     }
 

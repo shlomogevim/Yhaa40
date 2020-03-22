@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.view.View
 import android.widget.Toast
+import com.example.yhaa40.comversation.Conversation
 import kotlinx.android.synthetic.main.activity_one_talking.*
 
 class Helper(val context: Context) {
@@ -185,6 +186,23 @@ class Helper(val context: Context) {
     }
 
     object Page {
+      val conversList=ArrayList<Conversation>()
+        fun createConverList(){
+            var list= listOf<Conversation>(
+                Conversation("משהו מישהו","לא ברור מי נגד מי",R.drawable.sea),
+                Conversation("חנוך ילדים","איך לא לחנך ילדים",R.drawable.education),
+                Conversation("פחד","איל להתמודד עם הפחד",R.drawable.fear),
+                Conversation("קורונה","החיים בימי הקורונה",R.drawable.corona),
+                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
+                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
+                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
+                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
+                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
+                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round)
+                    )
+            conversList.addAll(list)
+        }
+
         val styleArray = ArrayList<StyleObject>()
         fun createBasicStyle() {
             var list = listOf<StyleObject>(

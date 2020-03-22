@@ -25,7 +25,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/picView"
+                android:id="@+id/adress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -46,7 +46,7 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/picView"
+                app:layout_constraintStart_toEndOf="@+id/adress"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -60,7 +60,7 @@
                 android:text="שיחה "
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/picView"
+                app:layout_constraintStart_toEndOf="@+id/adress"
                 app:layout_constraintTop_toBottomOf="@+id/tv_conNum" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/picView"
+                app:layout_constraintStart_toEndOf="@+id/adress"
                 app:layout_constraintTop_toBottomOf="@+id/tv_ConvTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

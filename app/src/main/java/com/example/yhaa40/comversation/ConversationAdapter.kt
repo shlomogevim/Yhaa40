@@ -10,19 +10,20 @@ import com.example.yhaa40.OneTalking
 import com.example.yhaa40.R
 import kotlinx.android.synthetic.main.list_row.view.*
 
-class PersonListAdapter(val context: Context,private val personList:ArrayList<Person>):
-    RecyclerView.Adapter<PersonListAdapter.ViewHolder>() {
+class ConversationAdapter(val context: Context, private val conversationList:ArrayList<Conversation>):
+    RecyclerView.Adapter<ConversationAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val inflater=LayoutInflater.from(parent.context)
         val view=inflater.inflate(R.layout.list_row,parent,false )
         return ViewHolder(view)
     }
-    override fun getItemCount()=personList.size
+    override fun getItemCount()=conversationList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.view.name.text=personList[position].name
-        holder.view.age.text=personList[position].age.toString()
+        holder.view.title.text=conversationList[position].title
+        holder.view.discription.text=conversationList[position].description
+        conversationList[position].adress?.let { holder.view.adress.setImageResource(it) }
         holder.view.cardView.setOnClickListener {
             val intent=Intent(context, OneTalking::class.java)
             intent.putExtra("TalkNum",position)
