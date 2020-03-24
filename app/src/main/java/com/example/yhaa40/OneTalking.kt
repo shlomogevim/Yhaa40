@@ -16,6 +16,8 @@ class OneTalking : AppCompatActivity() {
         setContentView(R.layout.activity_one_talking)
 
         pref = GetAndStoreData(this)
+       /* var talkList = pref.getTalkingList(0)
+        pref.saveCurrentPage(1)*/
         numTalking = intent.getIntExtra("TalkNum", 0)
         pref.saveRecognizer(numTalking)
 
@@ -29,7 +31,7 @@ class OneTalking : AppCompatActivity() {
 
 
 
-        pref.saveCurrentPage(30)
+        pref.saveCurrentPage(53)
 
 
 
