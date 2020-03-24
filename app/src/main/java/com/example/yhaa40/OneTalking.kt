@@ -23,26 +23,25 @@ class OneTalking : AppCompatActivity() {
         enterData()
         animationInAction.executeTalker()
     }
-
     private fun enterData() {
         var talkList = pref.getTalkingList(0) //***********
 
-        pref.saveCurrentPage(1)
+
+
+
+        pref.saveCurrentPage(30)
+
+
+
 
         pref.saveFonts(1)
     }
-
     private fun initAll() {
-
-
         // var talkList = pref.getTalkingList(0) //***********
-
         var showPosition = true
         pref.saveShowPosition(showPosition)
         var testMode = false
         pref.saveTestMode(testMode)
-
-
         arrangeScreen = ArrangeScreen(this)
         buttonSpace = ButtonSpace(this)
         animationInAction = AnimationInAction1(this)

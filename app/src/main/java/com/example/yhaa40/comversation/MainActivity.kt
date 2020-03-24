@@ -21,15 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        /*val talkNum = 0
-        when (talkNum){
-            -1-> setSpesialTalk(talkNum)
-          //  -2->activateList()
-            else->activateList()
-
-        }*/
-       val talkNum = -1
+       val talkNum = 3
 
         if (talkNum==-1){
             activateList()
