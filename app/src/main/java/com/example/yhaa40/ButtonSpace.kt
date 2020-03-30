@@ -269,6 +269,8 @@ class ButtonSpace(val context: Context) : View.OnClickListener {
         pref.saveLastTalker(pref.currentTalk())
         var cu = getCurrentPage()
         cu++
+        val list=pref.getTalkingList(1)
+        if (list.size-1<cu) cu=1
         pref.saveCurrentPage(cu)
         redGreenTvPage()
         animationInAction.executeTalker()

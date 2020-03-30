@@ -27,13 +27,13 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
 
 
     var myPref = context.getSharedPreferences(PREFS_NAME, 0)
-    val recogniger=getRecognizer()
+    val recogniger = getRecognizer()
 
-  //  private var talkList = getTalkingList(1)
+    //  private var talkList = getTalkingList(1)
 
 
     fun saveCurrentPage(index: Int) {
-        myPref.edit().putInt(CURRENT_PAGE+recogniger.toString(), index).apply()
+        myPref.edit().putInt(CURRENT_PAGE + recogniger.toString(), index).apply()
     }
 
     fun saveLastPage(index: Int) {
@@ -53,21 +53,21 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
     }
 
     fun saveFonts(index: Int) {
-        myPref.edit().putInt(FONTS+recogniger.toString(), index).apply()
+        myPref.edit().putInt(FONTS + recogniger.toString(), index).apply()
     }
 
     fun saveRecognizer(index: Int) {
         myPref.edit().putInt(RECOGNIZER, index).apply()
     }
 
-    fun getCurrentPage(): Int = myPref.getInt(CURRENT_PAGE+recogniger.toString(), 1)
+    fun getCurrentPage(): Int = myPref.getInt(CURRENT_PAGE + recogniger.toString(), 1)
     fun getLastPage(): Int = myPref.getInt(LAST_PAGE, 1)
     fun getInterval(): Int = myPref.getInt(INTERVAL, 0)
 
     // fun getCurrentFile(): Int = myPref.getInt(FILE_NUM, 1)
     fun getShowPosition(): Boolean = myPref.getBoolean(SHOWPOSITION, true)
     fun getTestMode(): Boolean = myPref.getBoolean(TESTMODE, false)
-    fun getFonts(): Int = myPref.getInt(FONTS+recogniger.toString(), 1)
+    fun getFonts(): Int = myPref.getInt(FONTS + recogniger.toString(), 1)
     fun getRecognizer(): Int = myPref.getInt(RECOGNIZER, 1)
 
     fun currentTalk(): Talker {
@@ -87,18 +87,18 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
         // val tagNum = getCurrentFile()
         val jsonString = gson.toJson(talkingList)
         // myPref.edit().putString(TALKLIST+tagNum.toString(), jsonString).apply()
-        myPref.edit().putString(TALKLIST+recogniger.toString(), jsonString).apply()
+        myPref.edit().putString(TALKLIST + recogniger.toString(), jsonString).apply()
     }
 
     fun saveLastTalker(lastTalker: Talker) {
         val gson = Gson()
         val jsonString = gson.toJson(lastTalker)
-        myPref.edit().putString(LASTTALKER+recogniger.toString(), jsonString).apply()
+        myPref.edit().putString(LASTTALKER + recogniger.toString(), jsonString).apply()
     }
 
     fun getLastTalker(): Talker {
         var talker = Talker()
-        var jsonS = myPref.getString(LASTTALKER+recogniger.toString(), null)
+        var jsonS = myPref.getString(LASTTALKER + recogniger.toString(), null)
         if (jsonS != null) {
             val gson = Gson()
             val type = object : TypeToken<Talker>() {}.type
@@ -110,7 +110,7 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
     fun getTalkingList(ind: Int): ArrayList<Talker> {
         val talkList: ArrayList<Talker>
         val gson = Gson()
-        val jsonString = myPref.getString(TALKLIST+recogniger.toString(), null)
+        val jsonString = myPref.getString(TALKLIST + recogniger.toString(), null)
 
         if (ind == 0 || jsonString == null) {
             talkList = createTalkListFromTheStart()
@@ -138,35 +138,18 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
         var talkList1 = arrayListOf<Talker>()
         val ADAM = "-אדם-"
         val GOD = "-אלוהים-"
-
-        //val currenteFile = "text/text" + ASSEETS_FILE + ".txt"
-
-        //  val currenteFile = "pretext/" + ASSEETS_FILE + ".txt"
-
-        //  val currenteFile = "text1/" + ASSEETS_FILE + ".txt"
-        val recognizer = getRecognizer()
-        var currenteFile = ""
-        when (recognizer) {
-            0 -> currenteFile = "show/" + "text14" + ".txt"
-            1 -> currenteFile = "show/" + "text15" + ".txt"
-            2 -> currenteFile = "show/" + "text16" + ".txt"
-           // 3 -> currenteFile = "show/" + "text10" + ".txt"
-            3 -> currenteFile = "show/" + "text9" + ".txt"
-
-        }
-
-
+        var i = 0
         var countItem = 0
+        var talker=Talker()
+        talkList1.add(countItem, talker)
+
+        val recognizer = getRecognizer()
+        var currenteFile = showFileName(recognizer)
         var text = context.assets.open(currenteFile).bufferedReader().use {
             it.readText()
         }
         text = text.replace("\r", "")
         var list1 = text.split(ADAM)
-
-        var talker = Talker()
-
-        talkList1.add(countItem, talker)
-        var i = 0
 
         for (element in list1) {
             //  if (element != "" && element.length > 25) {
@@ -237,6 +220,18 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
             }
         }
         return talkList1
+    }
+
+    private fun showFileName(recognizer: Int): String {
+        var currenteFile = ""
+        when (recognizer) {
+            1 -> currenteFile = "show/" + "text15" + ".txt"
+            2 -> currenteFile = "show/" + "text16" + ".txt"
+            3 -> currenteFile = "show/" + "text9" + ".txt"
+            4 -> currenteFile = "show/" + "text7" + ".txt"
+
+        }
+        return currenteFile
     }
 
     private fun improveAr(ar: List<String>): List<String> {

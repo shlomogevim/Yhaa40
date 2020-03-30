@@ -21,25 +21,33 @@ class OneTalking : AppCompatActivity() {
         numTalking = intent.getIntExtra("TalkNum", 0)
         pref.saveRecognizer(numTalking)
 
-        initAll()
+         initAll()
         enterData()
         animationInAction.executeTalker()
     }
     private fun enterData() {
+
         var talkList = pref.getTalkingList(0) //***********
+        pref.saveCurrentPage(47)
 
 
 
 
-        pref.saveCurrentPage(53)
 
 
 
 
-        pref.saveFonts(1)
+      //  pref.saveFonts(1)
     }
     private fun initAll() {
         // var talkList = pref.getTalkingList(0) //***********
+
+
+
+
+
+
+
         var showPosition = true
         pref.saveShowPosition(showPosition)
         var testMode = false
