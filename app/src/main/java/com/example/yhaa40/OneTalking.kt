@@ -28,7 +28,7 @@ class OneTalking : AppCompatActivity() {
     private fun enterData() {
 
         var talkList = pref.getTalkingList(0) //***********
-        pref.saveCurrentPage(47)
+        pref.saveCurrentPage(12)
 
 
 

@@ -229,6 +229,7 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
             2 -> currenteFile = "show/" + "text16" + ".txt"
             3 -> currenteFile = "show/" + "text9" + ".txt"
             4 -> currenteFile = "show/" + "text7" + ".txt"
+            5 -> currenteFile = "show/" + "text8" + ".txt"
 
         }
         return currenteFile
