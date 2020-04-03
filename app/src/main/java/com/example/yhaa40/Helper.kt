@@ -14,9 +14,9 @@ class Helper(val context: Context) {
     val pref = GetAndStoreData(context)
 
     fun activateHowSpeaking() {
-        val talker=pref.currentTalk()
+        val talker = pref.currentTalk()
         val anim = AnimatorInflater.loadAnimator(context, R.animator.alpha)
-        val showPosition=pref.getShowPosition()
+        val showPosition = pref.getShowPosition()
 
         if (showPosition) {
             if (talker.whoSpeake == "man") {
@@ -39,14 +39,15 @@ class Helper(val context: Context) {
             activity.man_speaking_iv.visibility = View.INVISIBLE
         }
     }
-   /* fun currentPage(): Int {
-        var cu = pref.getCurrentPage()
-        if (cu < 1 || cu >= talkList.size) {
-            cu = 1
-            pref.saveCurrentPage(cu)
-        }
-        return cu
-    }*/
+
+    /* fun currentPage(): Int {
+         var cu = pref.getCurrentPage()
+         if (cu < 1 || cu >= talkList.size) {
+             cu = 1
+             pref.saveCurrentPage(cu)
+         }
+         return cu
+     }*/
     fun showToast(st: String) {
         Toast.makeText(context, st, Toast.LENGTH_SHORT).show()
     }
@@ -186,20 +187,44 @@ class Helper(val context: Context) {
     }
 
     object Page {
-      val conversList=ArrayList<Conversation>()
-        fun createConverList(){
-            var list= listOf<Conversation>(
-                Conversation("משהו מישהו","לא ברור מי נגד מי",R.drawable.sea),
-                Conversation("חנוך ילדים","איך לא לחנך ילדים",R.drawable.education),
-                Conversation("פחד","איל להתמודד עם הפחד",R.drawable.fear),
-                Conversation("קורונה","החיים בימי הקורונה",R.drawable.corona),
-                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
-                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
-                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
-                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
-                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round),
-                Conversation("בעבודה","מה לעשות, עדיין בעבודה",R.mipmap.ic_launcher_round)
-                    )
+        val conversList = ArrayList<Conversation>()
+        fun createConverList() {
+            var list = listOf<Conversation>(
+                /*0*/
+                Conversation("משהו מישהו", "לא ברור מי נגד מי", R.drawable.sea),
+                /*1*/
+                Conversation("חנוך ילדים", "איך לא לחנך ילדים", R.drawable.education),
+                /*2*/
+                Conversation("משמעות החיים", "הם יש בכלל משמעות לחיים", R.drawable.life),
+                /*3*/
+                Conversation("פחד,ימי קורונה", "איך להתמודד עם הפחד", R.drawable.corona),
+                /*4*/
+                Conversation("מי אני,מה אני", "על הגדרות וחוסר הגדרות", R.drawable.man),
+                /*5*/
+                Conversation("ריקנות", "בשיבחי הריקנות", R.drawable.empty),
+
+
+             /*   *//*0*//*
+                Conversation("משהו מישהו", "לא ברור מי נגד מי", R.drawable.sea),
+                *//*1*//*
+                Conversation("חנוך ילדים", "איך לא לחנך ילדים", R.drawable.education),
+                *//*2*//*
+                Conversation("משמעות החיים", "הם יש בכלל משמעות לחיים", R.drawable.life),
+                *//*3*//*
+                Conversation("פחד,ימי קורונה", "איך להתמודד עם הפחד", R.drawable.corona),
+                *//*4*//*
+                Conversation("מי אני,מה אני", "על הגדרות וחוסר הגדרות", R.drawable.man),
+                *//*5*//*
+                Conversation("ריקנות", "בשיבחי הריקנות", R.drawable.empty),*/
+
+
+                Conversation("בעבודה", "מה לעשות, עדיין בעבודה", R.mipmap.ic_launcher_round),
+                Conversation("בעבודה", "מה לעשות, עדיין בעבודה", R.mipmap.ic_launcher_round),
+                Conversation("בעבודה", "מה לעשות, עדיין בעבודה", R.mipmap.ic_launcher_round),
+                Conversation("בעבודה", "מה לעשות, עדיין בעבודה", R.mipmap.ic_launcher_round),
+                Conversation("בעבודה", "מה לעשות, עדיין בעבודה", R.mipmap.ic_launcher_round),
+                Conversation("בעבודה", "מה לעשות, עדיין בעבודה", R.mipmap.ic_launcher_round)
+            )
             conversList.addAll(list)
         }
 

@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yhaa40.Const.Companion.CURRENT_PAGE
+import com.example.yhaa40.Const.Companion.FIRSTTALK
 import com.example.yhaa40.Const.Companion.FONTS
 import com.example.yhaa40.Const.Companion.INTERVAL
 import com.example.yhaa40.Const.Companion.LASTTALKER
@@ -27,12 +28,13 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
 
 
     var myPref = context.getSharedPreferences(PREFS_NAME, 0)
-    val recogniger = getRecognizer()
+   // val recogniger = getRecognizer()
 
     //  private var talkList = getTalkingList(1)
 
 
     fun saveCurrentPage(index: Int) {
+        val recogniger = getRecognizer()
         myPref.edit().putInt(CURRENT_PAGE + recogniger.toString(), index).apply()
     }
 
@@ -51,8 +53,12 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
     fun saveTestMode(bo: Boolean) {
         myPref.edit().putBoolean(TESTMODE, bo).apply()
     }
+    fun saveFirstTalk(bo: Boolean) {
+        myPref.edit().putBoolean(FIRSTTALK, bo).apply()
+    }
 
     fun saveFonts(index: Int) {
+        val recogniger = getRecognizer()
         myPref.edit().putInt(FONTS + recogniger.toString(), index).apply()
     }
 
@@ -60,14 +66,21 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
         myPref.edit().putInt(RECOGNIZER, index).apply()
     }
 
-    fun getCurrentPage(): Int = myPref.getInt(CURRENT_PAGE + recogniger.toString(), 1)
+    fun getCurrentPage(): Int{
+        val recogniger = getRecognizer()
+        return myPref.getInt(CURRENT_PAGE + recogniger.toString(), 1)
+    }
     fun getLastPage(): Int = myPref.getInt(LAST_PAGE, 1)
     fun getInterval(): Int = myPref.getInt(INTERVAL, 0)
 
     // fun getCurrentFile(): Int = myPref.getInt(FILE_NUM, 1)
     fun getShowPosition(): Boolean = myPref.getBoolean(SHOWPOSITION, true)
     fun getTestMode(): Boolean = myPref.getBoolean(TESTMODE, false)
-    fun getFonts(): Int = myPref.getInt(FONTS + recogniger.toString(), 1)
+    fun getFirstTalk(): Boolean = myPref.getBoolean(FIRSTTALK, true)
+    fun getFonts(): Int {
+        val recogniger = getRecognizer()
+        return myPref.getInt(FONTS + recogniger.toString(), 1)
+    }
     fun getRecognizer(): Int = myPref.getInt(RECOGNIZER, 1)
 
     fun currentTalk(): Talker {
@@ -83,6 +96,7 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
 
 
     fun saveTalkingList(talkingList: ArrayList<Talker>) {
+        val recogniger = getRecognizer()
         val gson = Gson()
         // val tagNum = getCurrentFile()
         val jsonString = gson.toJson(talkingList)
@@ -91,12 +105,14 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
     }
 
     fun saveLastTalker(lastTalker: Talker) {
+        val recogniger = getRecognizer()
         val gson = Gson()
         val jsonString = gson.toJson(lastTalker)
         myPref.edit().putString(LASTTALKER + recogniger.toString(), jsonString).apply()
     }
 
     fun getLastTalker(): Talker {
+        val recogniger = getRecognizer()
         var talker = Talker()
         var jsonS = myPref.getString(LASTTALKER + recogniger.toString(), null)
         if (jsonS != null) {
@@ -108,6 +124,7 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
     }
 
     fun getTalkingList(ind: Int): ArrayList<Talker> {
+        val recogniger = getRecognizer()
         val talkList: ArrayList<Talker>
         val gson = Gson()
         val jsonString = myPref.getString(TALKLIST + recogniger.toString(), null)
@@ -125,6 +142,13 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
         return talkList
     }
 
+    fun createListZero(recognizer1:Int){
+        val talkList=createTalkListFromTheStart1(recognizer1)
+        saveRecognizer(recognizer1)
+        saveTalkingList(talkList)
+        saveCurrentPage(1)
+        saveLastTalker(talkList[1])
+    }
 
     private fun setToastMessage(st: String) {
         val st0 = "במשפט  :"
@@ -134,7 +158,12 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
 
     }
 
-    fun createTalkListFromTheStart(): ArrayList<Talker> {
+    fun createTalkListFromTheStart1(recognizer1:Int): ArrayList<Talker> {
+
+        var currenteFile = showFileName(recognizer1)
+
+        Log.d("clima","GetAndStoreData->FromTheStart1->recogniger1=$recognizer1")
+
         var talkList1 = arrayListOf<Talker>()
         val ADAM = "-אדם-"
         val GOD = "-אלוהים-"
@@ -142,9 +171,96 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
         var countItem = 0
         var talker=Talker()
         talkList1.add(countItem, talker)
+        var text = context.assets.open(currenteFile).bufferedReader().use {
+            it.readText()
+        }
+        text = text.replace("\r", "")
+        var list1 = text.split(ADAM)
 
+        for (element in list1) {
+            //  if (element != "" && element.length > 25) {
+            if (element != "") {
+                i++
+                var list2 = element.split(GOD)
+                if (list2.size < 2) {
+                    Log.i("clima", " $element   withoutgod")
+                    return talkList1
+                }
+                var st1 = improveString(list2[0])
+                var st2 = improveString(list2[1])
+                if (st1.isNullOrEmpty() || st2.isNullOrEmpty()) {
+                    return talkList1
+                }
+                countItem++
+                talker = Talker()
+                with(talker) {
+                    whoSpeake = "man"
+                    taking = st1.trim()
+                    numTalker = countItem
+                    var arr = st1.split("\n")
+                    var ar = arr.toList()
+                    arr = improveAr(ar)
+
+                    if (arr.size > 6) {
+                        //  setToastMessage(st1)
+                        Log.i("clima", "st1->$st1")
+                    }
+                    for (item in arr) {
+                        if (item.isNotBlank()) {
+                            takingArray.add(item)
+                        }
+                    }
+                    talker.numTalker = countItem
+                    styleNum = 51
+                    colorText = "#574339"
+                    colorBack = "#fdd835"
+                    borderColor = "#000000"
+                    borderWidth = 0
+                }
+                talkList1.add(talker)
+                countItem++
+                talker = Talker()
+                with(talker) {
+                    whoSpeake = "god"
+                    talker.taking = st2.trim()
+                    var arr = st2.split("\n")
+                    arr = improveAr(arr)
+                    if (arr.size > 6) {
+                        //  setToastMessage(st1)
+                        Log.i("clima", "st1->$st1")
+                    }
+                    for (item in arr) {
+                        if (item.isNotBlank()) {
+                            takingArray.add(item)
+                        }
+                    }
+                    talker.numTalker = countItem
+                    styleNum = 51
+                    colorText = "#574339"
+                    colorBack = "#fdd835"
+                    borderColor = "#000000"
+                    borderWidth = 0
+
+                }
+                talkList1.add(talker)
+            }
+        }
+        return talkList1
+    }
+
+    fun createTalkListFromTheStart(): ArrayList<Talker> {
         val recognizer = getRecognizer()
         var currenteFile = showFileName(recognizer)
+
+        Log.d("clima","GetAndStoreData->FromTheStart->recogniger=$recognizer")
+
+        var talkList1 = arrayListOf<Talker>()
+        val ADAM = "-אדם-"
+        val GOD = "-אלוהים-"
+        var i = 0
+        var countItem = 0
+        var talker=Talker()
+        talkList1.add(countItem, talker)
         var text = context.assets.open(currenteFile).bufferedReader().use {
             it.readText()
         }
@@ -225,11 +341,12 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
     private fun showFileName(recognizer: Int): String {
         var currenteFile = ""
         when (recognizer) {
-            1 -> currenteFile = "show/" + "text15" + ".txt"
-            2 -> currenteFile = "show/" + "text16" + ".txt"
+            1 -> currenteFile = "show/" + "text16" + ".txt"
+            2 -> currenteFile = "show/" + "text15" + ".txt"
             3 -> currenteFile = "show/" + "text9" + ".txt"
             4 -> currenteFile = "show/" + "text7" + ".txt"
             5 -> currenteFile = "show/" + "text8" + ".txt"
+            else-> currenteFile = "show/" + "text15" + ".txt"
 
         }
         return currenteFile

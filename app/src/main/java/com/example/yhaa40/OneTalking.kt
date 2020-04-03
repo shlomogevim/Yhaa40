@@ -2,6 +2,7 @@ package com.example.yhaa40
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_one_talking.*
 
 class OneTalking : AppCompatActivity() {
@@ -16,35 +17,32 @@ class OneTalking : AppCompatActivity() {
         setContentView(R.layout.activity_one_talking)
 
         pref = GetAndStoreData(this)
-       /* var talkList = pref.getTalkingList(0)
-        pref.saveCurrentPage(1)*/
-        numTalking = intent.getIntExtra("TalkNum", 0)
-        pref.saveRecognizer(numTalking)
 
-         initAll()
+        numTalking = intent.getIntExtra("TalkNum", 0)
+        Log.d("clima", "oneTalking numTalking-> $numTalking")
+
+        pref.createListZero(numTalking)
+        val list=pref.getTalkingList(1)
+
+        pref.saveRecognizer(numTalking)
+        if (pref.getFirstTalk()) {
+            initAll()
+    }
         enterData()
         animationInAction.executeTalker()
+       // pref.saveFirstTalk(false)
     }
+
+
+
     private fun enterData() {
 
-        var talkList = pref.getTalkingList(0) //***********
-        pref.saveCurrentPage(56)
-
-
-
-
-
-
-
+        //var talkList = pref.getTalkingList(0) //***********
+        pref.saveCurrentPage(1)
 
       //  pref.saveFonts(1)
     }
     private fun initAll() {
-        // var talkList = pref.getTalkingList(0) //***********
-
-
-
-
 
 
 

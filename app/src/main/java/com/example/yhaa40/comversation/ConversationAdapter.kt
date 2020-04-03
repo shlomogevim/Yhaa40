@@ -2,6 +2,7 @@ package com.example.yhaa40.comversation
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class ConversationAdapter(val context: Context, private val conversationList:Arr
         holder.view.cardView.setOnClickListener {
             val intent=Intent(context, OneTalking::class.java)
             intent.putExtra("TalkNum",position)
+            Log.d("clima","Conversationadapter -> onBind -> position -> $position")
             context.startActivity(intent)
 
         }

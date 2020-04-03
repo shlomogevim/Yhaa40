@@ -12,7 +12,7 @@ import com.example.yhaa40.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var pref: GetAndStoreData
+    // lateinit var pref: GetAndStoreData
     private var adapter: ConversationAdapter? = null
     private var conversationList: ArrayList<Conversation>? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -20,44 +20,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val pref = GetAndStoreData(this)
+        pref.saveFirstTalk(true)
 
-       val talkNum = 5
+        val talkNum = -1
 
-        if (talkNum==-1){
+        if (talkNum < 1) {
             activateList()
         }
-       if (talkNum in 0..99) {
-           setSpesialTalk(talkNum)
-       }
+        if (talkNum in 0..99) {
+            setSpesialTalk(talkNum)
+        }
 
 
     }
 
     private fun activateList() {
-      conversationList = ArrayList<Conversation>()
-       Helper.Page.createConverList()
-        conversationList=Helper.Page.conversList
+        conversationList = ArrayList<Conversation>()
+        Helper.Page.createConverList()
+        conversationList = Helper.Page.conversList
 
         layoutManager = LinearLayoutManager(this)
         adapter = ConversationAdapter(this, conversationList!!)
-           // ConversationAdapter(this, conversationList!!)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-
-      /*  for (i in 0..91) {
-            val preson = Conversation(
-                "Mami" + i.toString(),
-                (40 + i).toString()
-            )
-            conversationList!!.add(preson)
-        }*/
-
         adapter!!.notifyDataSetChanged()
     }
 
     private fun setSpesialTalk(talkNum: Int) {
-        val intent= Intent(this, OneTalking::class.java)
-        intent.putExtra("TalkNum",talkNum)
+        val intent = Intent(this, OneTalking::class.java)
+        intent.putExtra("TalkNum", talkNum)
         startActivity(intent)
     }
 }

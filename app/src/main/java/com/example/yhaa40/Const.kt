@@ -16,6 +16,7 @@ class Const {
         const val LASTTALKER = "lasttalker"
         const val SHOWPOSITION = "show_position"
         const val TESTMODE = "testmode"
+        const val FIRSTTALK = "firsttalk"
         const val FONTS = "fonts"
         const val INTERVAL = "interval"
         const val TALKLIST = "talklist"
