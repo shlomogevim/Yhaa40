@@ -185,6 +185,20 @@ class Helper(val context: Context) {
         }
 
     }
+    object Sent{
+        var sentList=ArrayList<Sentence>()
+        fun createSentList(){
+            var list= listOf<Sentence>(
+                Sentence("זה המשפט הראשון","וזה ההסבר למשפט הראשון"),
+                Sentence("זה המשפט השני","וזה ההסבר למשפט השני"),
+                Sentence("זה המשפט השלישי","וזה ההסבר למשפט השלישי"),
+                Sentence("זה המשפט הרביעי","וזה ההסבר למשפט הרביעי"),
+                Sentence("זה המשפט ההחמישי","וזה ההסבר למשפט החמישי"),
+                Sentence("זה המשפט השישי","וזה ההסבר למשפט השישע")
+            )
+            sentList.addAll(list)
+        }
+    }
 
     object Page {
         val conversList = ArrayList<Conversation>()

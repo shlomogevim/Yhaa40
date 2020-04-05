@@ -1,8 +1,10 @@
 package com.example.yhaa40
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.yhaa40.comversation.SentenceActivity
 import kotlinx.android.synthetic.main.activity_one_talking.*
 
 class OneTalking : AppCompatActivity() {
@@ -20,17 +22,23 @@ class OneTalking : AppCompatActivity() {
 
         numTalking = intent.getIntExtra("TalkNum", 0)
         Log.d("clima", "oneTalking numTalking-> $numTalking")
+        if (numTalking > 0) {
 
-        pref.createListZero(numTalking)
-        val list=pref.getTalkingList(1)
 
-        pref.saveRecognizer(numTalking)
-        if (pref.getFirstTalk()) {
-            initAll()
-    }
-        enterData()
-        animationInAction.executeTalker()
-       // pref.saveFirstTalk(false)
+            pref.createListZero(numTalking)
+            val list = pref.getTalkingList(1)
+
+            pref.saveRecognizer(numTalking)
+            if (pref.getFirstTalk()) {
+                initAll()
+            }
+            enterData()
+            animationInAction.executeTalker()
+
+        }else{
+            val intent = Intent(this, SentenceActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

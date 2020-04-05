@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             activateList()
         }
         if (talkNum in 0..99) {
+
             setSpesialTalk(talkNum)
         }
 
@@ -42,8 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         layoutManager = LinearLayoutManager(this)
         adapter = ConversationAdapter(this, conversationList!!)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
+        recyclerViewTalkingId.layoutManager = layoutManager
+        recyclerViewTalkingId.adapter = adapter
         adapter!!.notifyDataSetChanged()
     }
 
