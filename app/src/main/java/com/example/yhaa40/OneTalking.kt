@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.yhaa40.comversation.MainActivity
 import com.example.yhaa40.comversation.SentenceActivity
 import kotlinx.android.synthetic.main.activity_one_talking.*
 
@@ -22,36 +23,41 @@ class OneTalking : AppCompatActivity() {
 
         numTalking = intent.getIntExtra("TalkNum", 0)
         Log.d("clima", "oneTalking numTalking-> $numTalking")
+
+
+        pref.createListZero(numTalking)
+        val list = pref.getTalkingList(1)
+
+        pref.saveRecognizer(numTalking)
+        if (pref.getFirstTalk()) {
+            initAll()
+        }
         if (numTalking > 0) {
-
-
-            pref.createListZero(numTalking)
-            val list = pref.getTalkingList(1)
-
-            pref.saveRecognizer(numTalking)
-            if (pref.getFirstTalk()) {
-                initAll()
-            }
             enterData()
             animationInAction.executeTalker()
-
-        }else{
+        } else {
             val intent = Intent(this, SentenceActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent,5)
         }
     }
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode==5){
+            val intent=Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     private fun enterData() {
 
         //var talkList = pref.getTalkingList(0) //***********
         pref.saveCurrentPage(1)
 
-      //  pref.saveFonts(1)
+        //  pref.saveFonts(1)
     }
-    private fun initAll() {
 
+    private fun initAll() {
 
 
         var showPosition = true
