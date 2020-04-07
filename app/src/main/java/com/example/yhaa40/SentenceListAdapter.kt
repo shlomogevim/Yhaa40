@@ -1,6 +1,7 @@
 package com.example.yhaa40
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -51,34 +52,16 @@ class SentenceListAdapter(val context: Context,private var sentenceList: ArrayLi
         vi2.typeface=helper.getTypeFace(13)
         vi2.setLineSpacing(1.3f,1.3f)
 
-        val params=ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        params.setMargins(0, 130, 0, 0)
+        val params= LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(0, 30.toPx(), 0, 0)
         vi2.setLayoutParams(params)
-
-       /* val params: LinearLayout.LayoutParams =
-            LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        params.setMargins(10, 10, 10, 10)
-        vi2.setLayoutParams(params)*/
-
-
-
-
-
     }
+
+    fun Int.toPx()=(this*Resources.getSystem().displayMetrics.density).toInt()
 
     class SentenceViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 
 }
-/*
-
-        tv.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, talker.textSize)
-        val font = pref.getFonts()
-        tv.typeface = helper.getTypeFace(font)
-
-        tv.setPadding(talker.padding[0], talker.padding[1], talker.padding[2], talker.padding[3])
-
-        //   tv.setPadding(40, 40, 40, 40)
-        tv.text = st.trim()
-
-        return tv
-    }*/
