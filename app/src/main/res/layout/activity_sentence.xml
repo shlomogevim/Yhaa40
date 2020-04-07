@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="1dp"
         android:scaleType="centerCrop"
         android:src="@drawable/lilly2"

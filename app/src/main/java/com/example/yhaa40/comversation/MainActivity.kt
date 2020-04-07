@@ -23,17 +23,18 @@ class MainActivity : AppCompatActivity() {
         val pref = GetAndStoreData(this)
         pref.saveFirstTalk(true)
 
-        val talkNum = -1
-
-        if (talkNum < 1) {
-            activateList()
+        val talkNum = -2
+        when (talkNum){
+            -1->activateList()
+            in 0..99->setSpesialTalk(talkNum)
+            -2->activateWord()
         }
-        if (talkNum in 0..99) {
+    }
 
-            setSpesialTalk(talkNum)
-        }
-
-
+    private fun activateWord() {
+        val intent = Intent(this, OneTalking::class.java)
+        intent.putExtra("TalkNum", 0)
+        startActivity(intent)
     }
 
     private fun activateList() {

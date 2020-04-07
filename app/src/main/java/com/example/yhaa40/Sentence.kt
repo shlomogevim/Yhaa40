@@ -1,7 +1,7 @@
 package com.example.yhaa40
 
 data class Sentence(
-    val sentenceText:String,
-    val explainText:String
+    val firstPartSen:String,
+    val secondPartSen:String
 ) {
 }

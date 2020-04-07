@@ -185,11 +185,20 @@ class Helper(val context: Context) {
         }
 
     }
+
+    fun setSentenceView(view: View, position: Int){
+
+    }
+
     object Sent{
         var sentList=ArrayList<Sentence>()
         fun createSentList(){
             var list= listOf<Sentence>(
-                Sentence("זה המשפט הראשון","וזה ההסבר למשפט הראשון"),
+                Sentence("בזמנים שהכול נשבר מסביב,\n" +
+                        "וכל גל נראה מאיים ואינסופי,\n" +
+                        "נזכר במשפט של אריק איינשטיין בערוב ימיו:",
+                        "בסוף, מה נשאר לך\n"+
+                        "רק אהבה."),
                 Sentence("זה המשפט השני","וזה ההסבר למשפט השני"),
                 Sentence("זה המשפט השלישי","וזה ההסבר למשפט השלישי"),
                 Sentence("זה המשפט הרביעי","וזה ההסבר למשפט הרביעי"),
@@ -205,31 +214,17 @@ class Helper(val context: Context) {
         fun createConverList() {
             var list = listOf<Conversation>(
                 /*0*/
-                Conversation("משהו מישהו", "לא ברור מי נגד מי", R.drawable.sea),
+                Conversation("תפזורת", "על מה שנכתב \n ועל מה שלא.", R.drawable.sea),
                 /*1*/
-                Conversation("חנוך ילדים", "איך לא לחנך ילדים", R.drawable.education),
+                Conversation("חנוך ילדים", "איך לא לחנך ילדים.", R.drawable.education),
                 /*2*/
-                Conversation("משמעות החיים", "הם יש בכלל משמעות לחיים", R.drawable.life),
+                Conversation("משמעות החיים", "האם יש בכלל משמעות לחיים.", R.drawable.life),
                 /*3*/
-                Conversation("פחד,ימי קורונה", "איך להתמודד עם הפחד", R.drawable.corona),
+                Conversation("פחד,ימי קורונה", "יצי קורונה,\nאיך להתמודד עם הפחד.", R.drawable.corona),
                 /*4*/
-                Conversation("מי אני,מה אני", "על הגדרות וחוסר הגדרות", R.drawable.man),
+                Conversation("מי אני,מה אני", "על הגדרות וחוסר הגדרות.", R.drawable.man),
                 /*5*/
-                Conversation("ריקנות", "בשיבחי הריקנות", R.drawable.empty),
-
-
-             /*   *//*0*//*
-                Conversation("משהו מישהו", "לא ברור מי נגד מי", R.drawable.sea),
-                *//*1*//*
-                Conversation("חנוך ילדים", "איך לא לחנך ילדים", R.drawable.education),
-                *//*2*//*
-                Conversation("משמעות החיים", "הם יש בכלל משמעות לחיים", R.drawable.life),
-                *//*3*//*
-                Conversation("פחד,ימי קורונה", "איך להתמודד עם הפחד", R.drawable.corona),
-                *//*4*//*
-                Conversation("מי אני,מה אני", "על הגדרות וחוסר הגדרות", R.drawable.man),
-                *//*5*//*
-                Conversation("ריקנות", "בשיבחי הריקנות", R.drawable.empty),*/
+                Conversation("ריקנות", "בשיבחי הריקנות.", R.drawable.empty),
 
 
                 Conversation("בעבודה", "מה לעשות, עדיין בעבודה", R.mipmap.ic_launcher_round),
@@ -336,6 +331,7 @@ class Helper(val context: Context) {
             ind == 10 -> Typeface.createFromAsset(context.assets, "fonts/frank.ttf")
             //  ind == 11 -> Typeface.createFromAsset(context.assets, "fonts/ozrad.ttf")
             ind == 12 -> Typeface.createFromAsset(context.assets, "fonts/simple.ttf")
+            ind == 13 -> Typeface.createFromAsset(context.assets, "fonts/dorian.ttf")
             else -> Typeface.SANS_SERIF
         }
 }

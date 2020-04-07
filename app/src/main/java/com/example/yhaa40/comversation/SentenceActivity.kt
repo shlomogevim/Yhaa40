@@ -3,14 +3,14 @@ package com.example.yhaa40.comversation
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yhaa40.Helper
 import com.example.yhaa40.R
 import com.example.yhaa40.Sentence
-import com.example.yhaa40.SentenceListAtapter
+import com.example.yhaa40.SentenceListAdapter
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sentence.*
 
 class SentenceActivity (): AppCompatActivity() {
@@ -20,6 +20,14 @@ class SentenceActivity (): AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sentence)
         operateSenRecyclerView()
+        rearrangeRecyclerView()
+    }
+
+    private fun rearrangeRecyclerView() {
+
+        val currentPosition=recyclerViewPostId.computeHorizontalScrollOffset()
+        Log.i("clima","SentenceActivity->currentPosition is ->$currentPosition")
+
     }
 
     fun operateSenRecyclerView() {
@@ -31,7 +39,8 @@ class SentenceActivity (): AppCompatActivity() {
         recyclerViewPostId.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         snapeHelper.attachToRecyclerView(recyclerViewPostId)
-        recyclerViewPostId.adapter = SentenceListAtapter(senteList)
+        recyclerViewPostId.adapter = SentenceListAdapter(this,senteList)
         recyclerViewPostId.adapter!!.notifyDataSetChanged()
     }
+
 }

@@ -22,17 +22,15 @@ class OneTalking : AppCompatActivity() {
         pref = GetAndStoreData(this)
 
         numTalking = intent.getIntExtra("TalkNum", 0)
-        Log.d("clima", "oneTalking numTalking-> $numTalking")
 
-
-        pref.createListZero(numTalking)
-        val list = pref.getTalkingList(1)
-
-        pref.saveRecognizer(numTalking)
-        if (pref.getFirstTalk()) {
-            initAll()
-        }
         if (numTalking > 0) {
+            pref.createListZero(numTalking)
+            val list = pref.getTalkingList(1)
+
+            pref.saveRecognizer(numTalking)
+            if (pref.getFirstTalk()) {
+                initAll()
+            }
             enterData()
             animationInAction.executeTalker()
         } else {

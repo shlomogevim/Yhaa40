@@ -77,6 +77,7 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
     fun getShowPosition(): Boolean = myPref.getBoolean(SHOWPOSITION, true)
     fun getTestMode(): Boolean = myPref.getBoolean(TESTMODE, false)
     fun getFirstTalk(): Boolean = myPref.getBoolean(FIRSTTALK, true)
+
     fun getFonts(): Int {
         val recogniger = getRecognizer()
         return myPref.getInt(FONTS + recogniger.toString(), 1)
