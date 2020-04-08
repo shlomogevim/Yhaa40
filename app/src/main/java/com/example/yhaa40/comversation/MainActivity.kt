@@ -23,12 +23,14 @@ class MainActivity : AppCompatActivity() {
         val pref = GetAndStoreData(this)
         pref.saveFirstTalk(true)
 
-        val talkNum = -2
+     //  val talkNum = -2
+      /*      val talkNum = -1
         when (talkNum){
             -1->activateList()
             in 0..99->setSpesialTalk(talkNum)
             -2->activateWord()
-        }
+        }*/
+        activateList()
     }
 
     private fun activateWord() {
@@ -37,6 +39,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        this.finish()
+    }
+
+  
     private fun activateList() {
         conversationList = ArrayList<Conversation>()
         Helper.Page.createConverList()
@@ -47,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         recyclerViewTalkingId.layoutManager = layoutManager
         recyclerViewTalkingId.adapter = adapter
         adapter!!.notifyDataSetChanged()
+
     }
 
     private fun setSpesialTalk(talkNum: Int) {

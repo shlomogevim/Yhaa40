@@ -1,19 +1,23 @@
 package com.example.yhaa40
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_sentence.view.*
 import kotlinx.android.synthetic.main.sentence_layout.view.*
 
 
 class SentenceListAdapter(val context: Context,private var sentenceList: ArrayList<Sentence>) :
     RecyclerView.Adapter<SentenceListAdapter.SentenceViewHolder>() {
+ var pref=GetAndStoreData(context)
 
 
      fun updateSentenceList(newList:ArrayList<Sentence>){
@@ -35,7 +39,14 @@ class SentenceListAdapter(val context: Context,private var sentenceList: ArrayLi
         holder.view.firstSenTV.text = sentenceList[position].firstPartSen
         holder.view.secondSenTV.text = sentenceList[position].secondPartSen
         setSentenceStyle(holder,position)
+        pref.saveCurrentePost(position)
+        holder.view.flowerPostIV.setOnClickListener {
+            val intent=Intent(context, YoutubActivity::class.java)
+            intent.putExtra("postnum",position)
+            context.startActivity(intent)
 
+
+        }
     }
 
     private fun setSentenceStyle(holder: SentenceListAdapter.SentenceViewHolder, position: Int) {

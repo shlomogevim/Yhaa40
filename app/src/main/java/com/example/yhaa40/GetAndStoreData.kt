@@ -7,6 +7,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.yhaa40.Const.Companion.CURRENTSENTENCE
 import com.example.yhaa40.Const.Companion.CURRENT_PAGE
 import com.example.yhaa40.Const.Companion.FIRSTTALK
 import com.example.yhaa40.Const.Companion.FONTS
@@ -42,6 +43,11 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
         myPref.edit().putInt(LAST_PAGE, index).apply()
     }
 
+    fun saveCurrentePost(index:Int){
+        myPref.edit().putInt(CURRENTSENTENCE,index).apply()
+    }
+
+
     fun saveInterval(index: Int) {
         myPref.edit().putInt(INTERVAL, index).apply()
     }
@@ -71,6 +77,7 @@ class GetAndStoreData(val context: Context) : AppCompatActivity() {
         return myPref.getInt(CURRENT_PAGE + recogniger.toString(), 1)
     }
     fun getLastPage(): Int = myPref.getInt(LAST_PAGE, 1)
+    fun getCurentPost():Int=myPref.getInt(CURRENTSENTENCE,100)
     fun getInterval(): Int = myPref.getInt(INTERVAL, 0)
 
     // fun getCurrentFile(): Int = myPref.getInt(FILE_NUM, 1)

@@ -44,6 +44,7 @@ class OneTalking : AppCompatActivity() {
         if (requestCode==5){
             val intent=Intent(this,MainActivity::class.java)
             startActivity(intent)
+
         }
     }
 
